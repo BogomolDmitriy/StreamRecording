@@ -9,7 +9,7 @@
     <Grid>
         <Menu VerticalAlignment="Top">
             <MenuItem Header="File">
-                <MenuItem Header="New" Click="New_Click"/>
+                <MenuItem Header="New Storage" Click="New_Storage"/>
                 <MenuItem Header="Open" Click="Open_Click"/>
                 <Separator/>
                 <MenuItem Header="Exit" Click="Exit_Click"/>

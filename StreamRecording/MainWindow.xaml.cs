@@ -24,7 +24,7 @@ namespace StreamRecording
 
         string selectedFilePath;
 
-        private void New_Click(object sender, RoutedEventArgs e)
+        private void New_Storage(object sender, RoutedEventArgs e)
         {
             // Создаем диалоговое окно сохранения файла
             SaveFileDialog saveFileDialog = new SaveFileDialog();
