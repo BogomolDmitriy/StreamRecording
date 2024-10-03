@@ -70,6 +70,5 @@ namespace StreamRecording
         {
             MessageBox.Show("About clicked");
         }
-        // Void
     }
 }
