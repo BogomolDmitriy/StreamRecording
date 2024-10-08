@@ -41,29 +41,14 @@ namespace StreamRecording
             }
         }
 
-        private void Open_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Open clicked");
-        }
-
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Application.Current.Shutdown();
         }
 
-        private void Cut_Click(object sender, RoutedEventArgs e)
+        private void Setting_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Cut clicked");
-        }
-
-        private void Copy_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Copy clicked");
-        }
-
-        private void Paste_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Paste clicked");
         }
 
         private void About_Click(object sender, RoutedEventArgs e)

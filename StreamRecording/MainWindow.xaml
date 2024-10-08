@@ -5,19 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StreamRecording"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="StreamRecording" Height="450" Width="350">
     <Grid>
         <Menu VerticalAlignment="Top">
             <MenuItem Header="File">
                 <MenuItem Header="New Storage" Click="New_Storage"/>
-                <MenuItem Header="Open" Click="Open_Click"/>
                 <Separator/>
                 <MenuItem Header="Exit" Click="Exit_Click"/>
             </MenuItem>
-            <MenuItem Header="Edit">
-                <MenuItem Header="Cut" Click="Cut_Click"/>
-                <MenuItem Header="Copy" Click="Copy_Click"/>
-                <MenuItem Header="Paste" Click="Paste_Click"/>
+            <MenuItem Header="Setting">
+                <MenuItem Header="Setting" Click="Setting_Click"/>
             </MenuItem>
             <MenuItem Header="Help">
                 <MenuItem Header="About" Click="About_Click"/>
