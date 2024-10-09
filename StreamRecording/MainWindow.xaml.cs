@@ -19,6 +19,7 @@ namespace StreamRecording
     {
         public MainWindow()
         {
+            windowSetup = new ApplicationSetup()
             InitializeComponent();
         }
 
