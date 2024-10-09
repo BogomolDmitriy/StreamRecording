@@ -21,5 +21,11 @@
             </MenuItem>
         </Menu>
 
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation ="Vertical">
+            <GroupBox>
+                
+            </GroupBox>
+        </StackPanel>
+
     </Grid>
 </Window>

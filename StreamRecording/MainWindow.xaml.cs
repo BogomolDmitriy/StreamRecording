@@ -17,9 +17,10 @@ namespace StreamRecording
     /// </summary>
     public partial class MainWindow : Window
     {
+        ApplicationSetup windowSetup;
         public MainWindow()
         {
-            windowSetup = new ApplicationSetup()
+            windowSetup = new ApplicationSetup(5,1);
             InitializeComponent();
         }
 
@@ -49,7 +50,7 @@ namespace StreamRecording
 
         private void Setting_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Cut clicked");
+            windowSetup.ShowDialog();
         }
 
         private void About_Click(object sender, RoutedEventArgs e)
