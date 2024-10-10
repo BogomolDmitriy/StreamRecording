@@ -6,15 +6,38 @@
         xmlns:local="clr-namespace:StreamRecording"
         xmlns:wpf="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="ApplicationSetup" Height="400" Width="600">
+        Title="Settings" Height="300" Width="250">
     <Grid>
         <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation ="Vertical">
-            <GroupBox Header="Player" Margin="5">
+            <GroupBox Header="Recording timer" Margin="5">
                 <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation ="Vertical">
-                    <wpf:IntegerUpDown Name="integerUpDown" Minimum="0" Maximum="100" ValueChanged="IntegerUpDown_ValueChanged" />
-                    <TextBlock Name="resultTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation ="Horizontal" Margin="10,5,10,10">
+                        <wpf:IntegerUpDown Name="hoursLimit" Minimum="0" Maximum="24" ValueChanged="IntegerUpDown_hoursLimitChanged" />
+                        <Label Content ="Hour (min 0, max 24)"/>
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation ="Horizontal" Margin="10,0,10,5">
+                        <wpf:IntegerUpDown Name="minLimit" Minimum="0" Maximum="59" ValueChanged="IntegerUpDown_minLimitChanged" />
+                        <Label Content ="Minutes (min 0, max 59)"/>
+                    </StackPanel>
                 </StackPanel>
             </GroupBox>
+            <GroupBox Header ="Emergency reconnect timer" Margin="5">
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation ="Vertical">
+                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation ="Horizontal" Margin="10,5,10,10">
+                        <wpf:IntegerUpDown Name="minEmergencyTimer" Minimum="0" Maximum="59" ValueChanged="EmergencyMinUpDown_Changed" />
+                        <Label Content="Minutes (min 0, max 59)"/>
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation ="Horizontal" Margin="10,0,10,5">
+                        <wpf:IntegerUpDown Name="secondsEmergencyTimer" Minimum="0" Maximum="59" ValueChanged="EmergencySecondsUpDown_Changed" />
+                        <Label Content="Seconds (min 0, max 59)"/>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation ="Horizontal">
+                <Button Content="Close" Width="100" Height="25" Click="CloseButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,10,10,10"/>
+                <Button x:Name ="buttonSave"  Content="Save" Width="100" Height="25" Click="SaveButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,10,10,10"/>
+
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Window>

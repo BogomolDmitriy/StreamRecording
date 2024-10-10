@@ -19,23 +19,115 @@ namespace StreamRecording
     /// </summary>
     public partial class ApplicationSetup : Window
     {
-        public int _min { get; set; }
-        public int _hour { get; set; }
-        public ApplicationSetup(int min, int hour)
+        private int tempRecordMin;
+        private int tempRecordHour;
+
+        private int tempEmergencySeconds;
+        private int tempEmergencyMinutes;
+
+        public int _recordMin { get; set; }
+        public int _recordHour { get; set; }
+
+        public int _emergencySeconds { get; set; }
+        public int _emergencyMinutes { get; set; }
+        public ApplicationSetup(int recordMin, int recordHour, int emergencySeconds, int emergencyMinutes)
         {
-            _min = min;
-            _hour = hour;
+            _recordMin = recordMin;
+            _recordHour = recordHour;
+            _emergencySeconds = emergencySeconds;
+            _emergencyMinutes = emergencyMinutes;
             InitializeComponent();
-            integerUpDown.Value = _min;
+            AssignElements();
         }
 
-        private void IntegerUpDown_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e) //Temp
+        private void IntegerUpDown_hoursLimitChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            if (integerUpDown.Value != null)
+            if (hoursLimit.Value != null)
             {
-                _min = (int)integerUpDown.Value;
-                resultTextBlock.Text = $"Значение: {_min}";
+                tempRecordHour = (int)hoursLimit.Value;
             }
+
+            SaveButtonActivityCheck();
+        }
+
+        private void IntegerUpDown_minLimitChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (minLimit.Value != null)
+            {
+                tempRecordMin = (int)minLimit.Value;
+            }
+
+            SaveButtonActivityCheck();
+        }
+
+        private void EmergencyMinUpDown_Changed(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (minEmergencyTimer.Value != null)
+            {
+                tempEmergencyMinutes = (int)minEmergencyTimer.Value;
+            }
+
+            SaveButtonActivityCheck();
+        }
+
+        private void EmergencySecondsUpDown_Changed(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (secondsEmergencyTimer.Value != null)
+            {
+                tempEmergencySeconds = (int)secondsEmergencyTimer.Value;
+            }
+
+            SaveButtonActivityCheck();
+        }
+
+        private void CloseButton_Click (object sender, RoutedEventArgs e)
+        {
+            AssignElements();
+            this.Hide();
+        }
+
+        private void SaveButton_Click (object sender, RoutedEventArgs e)
+        {
+            _recordMin = tempRecordMin;
+            _recordHour = tempRecordHour;
+            _emergencySeconds = tempEmergencySeconds;
+            _emergencyMinutes = tempEmergencyMinutes;
+            buttonSave.IsEnabled = false;
+            this.Hide();
+        }
+
+        private void SaveButtonActivityCheck ()
+        {
+            if (tempEmergencySeconds == 0 && tempEmergencyMinutes == 0)
+            { 
+                buttonSave.IsEnabled = false;
+            }
+
+            else if (tempRecordMin == 0 && tempRecordHour == 0)
+            {
+                buttonSave.IsEnabled = false;
+            }
+
+            else if (tempEmergencySeconds == _emergencySeconds && tempEmergencyMinutes == _emergencyMinutes && 
+                tempRecordMin == _recordMin && tempRecordHour == _recordHour)
+            {
+                buttonSave.IsEnabled = false;
+            }
+
+            else { buttonSave.IsEnabled = true; }
+        }
+
+        private void AssignElements ()
+        {
+            //_recordMin = tempRecordMin;
+            //_recordHour = tempRecordHour;
+            //_emergencySeconds = tempEmergencySeconds;
+            //_emergencyMinutes = tempEmergencyMinutes;
+
+            hoursLimit.Value = _recordHour;
+            minLimit.Value = _recordMin;
+            minEmergencyTimer.Value = _emergencyMinutes;
+            secondsEmergencyTimer.Value = _emergencySeconds;
         }
     }
 }

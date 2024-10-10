@@ -20,7 +20,7 @@ namespace StreamRecording
         ApplicationSetup windowSetup;
         public MainWindow()
         {
-            windowSetup = new ApplicationSetup(5,1);
+            windowSetup = new ApplicationSetup(5,1,0,1);
             InitializeComponent();
         }
 
@@ -45,6 +45,12 @@ namespace StreamRecording
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
+            Application.Current.Shutdown();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            // Завершить приложение
             Application.Current.Shutdown();
         }
 

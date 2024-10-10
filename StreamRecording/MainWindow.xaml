@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StreamRecording"
         mc:Ignorable="d"
-        Title="StreamRecording" Height="450" Width="350">
+        Title="StreamRecording" Height="450" Width="350" Closing="Window_Closing">
     <Grid>
         <Menu VerticalAlignment="Top">
             <MenuItem Header="File">
