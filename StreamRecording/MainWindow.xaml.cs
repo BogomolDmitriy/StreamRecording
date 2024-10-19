@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
 
 namespace StreamRecording
 {
@@ -18,14 +19,15 @@ namespace StreamRecording
     /// </summary>
     public partial class MainWindow : Window
     {
-        List<CaseRecordingStart> caseRecordingStarts;
+        public ObservableCollection<CaseRecordingStart> _CaseRecordingStarts { get; set; }
         ApplicationSetup windowSetup;
         public MainWindow()
         {
-            caseRecordingStarts = new List<CaseRecordingStart>(); //Список начатых записей
+            _CaseRecordingStarts = new ObservableCollection<CaseRecordingStart>(); //Список начатых записей
             windowSetup = new ApplicationSetup(5,1,0,1);
             InitializeComponent();
-            ComboBoxRecordingStreams.ItemsSource = caseRecordingStarts;
+            //ComboBoxRecordingStreams.ItemsSource = caseRecordingStarts;
+            this.DataContext = this;
         }
 
         string selectedFilePath;
@@ -70,7 +72,8 @@ namespace StreamRecording
 
         private void AddReccording_Click(object sender, RoutedEventArgs e)
         {
-            new RecordingStart(caseRecordingStarts);
+            new RecordingStart(_CaseRecordingStarts);
+
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

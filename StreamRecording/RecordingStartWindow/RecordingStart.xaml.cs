@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,11 +20,12 @@ namespace StreamRecording.RecordingStartWindow
     /// </summary>
     public partial class RecordingStart : Window
     {
-        public List<CaseRecordingStart> ListRecording;
-        public RecordingStart(List<CaseRecordingStart> listRecording)
+        public ObservableCollection<CaseRecordingStart> ListRecording;
+        public RecordingStart(ObservableCollection<CaseRecordingStart> listRecording)
         {
             InitializeComponent();
             ListRecording = listRecording;
+            AddList();
         }
 
         public void AddList ()
