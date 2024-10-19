@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using StreamRecording.RecordingStartWindow;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,11 +18,14 @@ namespace StreamRecording
     /// </summary>
     public partial class MainWindow : Window
     {
+        List<CaseRecordingStart> caseRecordingStarts;
         ApplicationSetup windowSetup;
         public MainWindow()
         {
+            caseRecordingStarts = new List<CaseRecordingStart>(); //Список начатых записей
             windowSetup = new ApplicationSetup(5,1,0,1);
             InitializeComponent();
+            ComboBoxRecordingStreams.ItemsSource = caseRecordingStarts;
         }
 
         string selectedFilePath;
@@ -62,6 +66,23 @@ namespace StreamRecording
         private void About_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("About clicked");
+        }
+
+        private void AddReccording_Click(object sender, RoutedEventArgs e)
+        {
+            new RecordingStart(caseRecordingStarts);
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Получаем выбранный элемент
+            CaseRecordingStart selectedCase = (CaseRecordingStart)ComboBoxRecordingStreams.SelectedItem;
+            if (selectedCase != null)
+            {
+                // Открываем выбранное окно
+                //Window window = (Window)Activator.CreateInstance(selectedCase._RecordingStart);
+                selectedCase._RecordingStart.Show();
+            }
         }
     }
 }

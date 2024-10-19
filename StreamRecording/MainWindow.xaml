@@ -22,9 +22,13 @@
         </Menu>
 
         <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation ="Vertical">
-            <GroupBox>
-                
-            </GroupBox>
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation ="Horizontal">
+                <ComboBox Name="ComboBoxRecordingStreams" DisplayMemberPath="Name" SelectionChanged="ComboBox_SelectionChanged" 
+                          Width="200" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,5,5,5"/>
+                <Button x:Name ="buttonAdd"  Content="Add" Width="100" Height="25" Click="AddReccording_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,10,10,10"/>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation ="Horizontal">
+            </StackPanel>
         </StackPanel>
 
     </Grid>
