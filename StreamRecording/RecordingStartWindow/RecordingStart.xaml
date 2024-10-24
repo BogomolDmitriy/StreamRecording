@@ -5,22 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StreamRecording.RecordingStartWindow"
         mc:Ignorable="d"
-        Title="RecordingStart" Height="400" Width="420">
+        Title="RecordingStart" Height="380" Width="411">
     <Grid>
         <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation ="Vertical" Margin="20">
             <Label x:Name="LabelStatusStrim" Content="Status"/>
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation ="Horizontal">
-                <TextBox Width="250" Height="30" Margin="0,5,5,5"/>
-                <Button Content="Add path" Width="100" Height="30"/>
+                <TextBox x:Name="FilePathTextBox" Width="250" Height="30" Margin="0,5,5,5"/>
+                <Button Content="Add path" Width="95" Height="30" Click="AddFilePath_Click"/>
             </StackPanel>
-            <TextBox Width="350" Height="30" Margin="0,20,5,5"/>
+            <TextBox Width="350" Height="30" Margin="0,20,5,5" HorizontalAlignment="Left"/>
             <Label Content="Selecting a recording method"/>
             <ComboBox Width="250" Height="30" HorizontalAlignment="Left"/>
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation ="Horizontal">
                 <ComboBox Width="250" Height="30" HorizontalAlignment="Left" Margin="0,5,5,5"/>
-                <Button Content="Add path" Width="100" Height="30"/>
+                <Button Content="Add path" Width="95" Height="30"/>
             </StackPanel>
-            <TextBox Width="350" Height="30" Margin="0,5,5,5"/>
+            <TextBox Width="350" Height="30" Margin="0,5,5,5" HorizontalAlignment="Left"/>
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation ="Horizontal">
                 <Button Content="Save" Width="100" Height="30" Margin="0,20,25,5"/>
                 <Button Content="Stop" Width="100" Height="30" Margin="0,20,25,5"/>
