@@ -9,13 +9,18 @@ using NAudio.Wave;
 
 namespace StreamRecording.RecordingStartWindow.Record
 {
-    public class RecordUrlWav : Record
+    public class RecordUrlWav : Record, IRecord
     {
         public RecordUrlWav(string urlAddress, string filePath) : base(urlAddress, filePath)
         {
         }
 
-        public override void StreamRecordingURL()
+        public void StartRecording()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void StreamRecordingURL()
         {
             var webRequest = WebRequest.Create(UrlAddress);
             using (var response = webRequest.GetResponse())

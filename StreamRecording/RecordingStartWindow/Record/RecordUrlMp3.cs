@@ -8,13 +8,18 @@ using System.Threading.Tasks;
 
 namespace StreamRecording.RecordingStartWindow.Record
 {
-    public class RecordUrlMp3 : Record
+    public class RecordUrlMp3 : Record, IRecord
     {
         public RecordUrlMp3(string urlAddress, string filePath) : base(urlAddress, filePath)
         {
         }
 
-        public override void StreamRecordingURL()
+        public void StartRecording()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void StreamRecordingURL()
         {
             var webRequest = WebRequest.Create(UrlAddress);
             using (var response = webRequest.GetResponse())

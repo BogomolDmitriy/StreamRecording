@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StreamRecording.RecordingStartWindow.Record
 {
-    public abstract class Record
+    public class Record
     {
         protected string UrlAddress;
         protected string FilePath;
@@ -16,7 +16,5 @@ namespace StreamRecording.RecordingStartWindow.Record
             UrlAddress = urlAddress;
             FilePath = filePath;
         }
-
-        public abstract void StreamRecordingURL();
     }
 }
