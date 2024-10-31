@@ -14,12 +14,18 @@ namespace StreamRecording.RecordingStartWindow.Record
         {
         }
 
-        public void StartRecording()
+        public async void StartRecording()
         {
-            throw new NotImplementedException();
+            RecordProcess = true;
+            await Task.Run(() => StreamRecordingURL());
         }
 
-        public void StreamRecordingURL()
+        public void StopRecording()
+        {
+            RecordProcess = false;
+        }
+
+        private void StreamRecordingURL()
         {
             var webRequest = WebRequest.Create(UrlAddress);
             using (var response = webRequest.GetResponse())
@@ -30,7 +36,7 @@ namespace StreamRecording.RecordingStartWindow.Record
                 int bytesRead;
 
                 // Чтение потока и сохранение в файл
-                while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
+                while (RecordProcess && (bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
                 {
                     fileStream.Write(buffer, 0, bytesRead);
                 }

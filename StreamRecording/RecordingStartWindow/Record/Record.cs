@@ -10,11 +10,18 @@ namespace StreamRecording.RecordingStartWindow.Record
     {
         protected string UrlAddress;
         protected string FilePath;
+        protected bool RecordProcess;
 
         public Record(string urlAddress, string filePath)
         {
             UrlAddress = urlAddress;
             FilePath = filePath;
+            RecordProcess = false;
+        }
+
+        public void StopRecord()
+        {
+            RecordProcess = false;
         }
     }
 }

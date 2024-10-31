@@ -8,7 +8,8 @@ namespace StreamRecording.RecordingStartWindow.Record
 {
     public interface IRecord
     {
-        void StreamRecordingURL();
+        //void StreamRecordingURL();
         void StartRecording();
+        void StopRecording();
     }
 }

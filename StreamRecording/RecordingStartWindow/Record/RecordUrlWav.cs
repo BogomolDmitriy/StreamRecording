@@ -15,12 +15,17 @@ namespace StreamRecording.RecordingStartWindow.Record
         {
         }
 
+        public void StopRecording()
+        {
+            RecordProcess = false;
+        }
+
         public void StartRecording()
         {
             throw new NotImplementedException();
         }
 
-        public void StreamRecordingURL()
+        private void StreamRecordingURL()
         {
             var webRequest = WebRequest.Create(UrlAddress);
             using (var response = webRequest.GetResponse())

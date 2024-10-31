@@ -18,6 +18,7 @@ using System.Xml.Linq;
 using Microsoft.Win32;
 using StreamRecording.RecordingStartWindow.Record;
 using StreamRecording.RecordingStartWindow.TestURL;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace StreamRecording.RecordingStartWindow
 {
@@ -69,7 +70,7 @@ namespace StreamRecording.RecordingStartWindow
             string[] parts = TempSelectedFilePath.Split("\\");
             Name = parts[parts.Length-1];
             this.Title = Name;
-
+            FilePath = TempSelectedFilePath;
             FilePathTextBox.Text = TempSelectedFilePath;
         }
 
@@ -95,35 +96,37 @@ namespace StreamRecording.RecordingStartWindow
 
                 TestUrlWindow = new TestUrlWindow(UrlList);
                 TestUrlWindow.Show();
-
-
             }
             catch (Exception)
             {
 
-                throw;
+                MessageBox.Show("Source not found", "Error");
             }
         }
 
         private void EnumComboBoxRecordingTools_SelectedIndexChanged (object sender, SelectionChangedEventArgs e)
         {
+            string url = URLPathTextBox.Text;
             RecordingTools recordingTools = (RecordingTools)EnumComboBoxRecordingTools.SelectedItem;
             switch(recordingTools)
             {
                 case RecordingTools.RecordUrlMp3:
-                    record = new RecordUrlMp3((string)UrlTextBox.Content, FilePath);
+                    record = new RecordUrlMp3(url, FilePath);
                     break;
                 case RecordingTools.RecordUrlWav:
-                    record = new RecordUrlWav((string)UrlTextBox.Content, FilePath);
+                    record = new RecordUrlWav(url, FilePath);
                     break;
             }    
         }
 
         private void ButtonStartRecording_Click(object sender, RoutedEventArgs e)
         {
-
+            record.StartRecording();
         }
 
-        
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            record.StopRecording();
+        }
     }
 }

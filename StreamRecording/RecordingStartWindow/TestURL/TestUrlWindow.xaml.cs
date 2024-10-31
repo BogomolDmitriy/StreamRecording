@@ -26,5 +26,10 @@ namespace StreamRecording.RecordingStartWindow.TestURL
             _BlueAboutTheSite= BlueAboutTheSite;
             TestURLDataGrid.ItemsSource = _BlueAboutTheSite;
         }
+
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
