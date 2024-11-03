@@ -36,6 +36,9 @@ namespace StreamRecording.RecordingStartWindow
 
         string TempSelectedFilePath;
 
+        bool BoolStartRecording_Button; // Тригер смены функции кнопки StartRecording_Button
+        bool BoolComboBoxRecordingTools = false; //тригер активации BoxRecording
+
         public ObservableCollection<CaseRecordingStart> ListRecording;
         public RecordingStart(ObservableCollection<CaseRecordingStart> listRecording)
         {
@@ -44,6 +47,16 @@ namespace StreamRecording.RecordingStartWindow
             AddList();
             EnumComboBoxRecordingTools.ItemsSource = Enum.GetValues(typeof(RecordingTools));
             //EnumComboBoxRecordingTools.SelectedIndex = 0;
+
+            URLPathTextBox.IsEnabled = false;
+            UrlTestButton.IsEnabled = false;
+
+            EnumComboBoxRecordingTools.IsEnabled = false;
+
+            StartRecording_Button.IsEnabled = false;
+            BoolStartRecording_Button = true;
+
+            SaveRecording_Button.IsEnabled = false;
         }
 
         public void AddList () //добавляем RecordingStart в лист открития, на главной странице
@@ -67,11 +80,42 @@ namespace StreamRecording.RecordingStartWindow
                 MessageBox.Show($"File will be saved at: {TempSelectedFilePath}");
             }
 
-            string[] parts = TempSelectedFilePath.Split("\\");
-            Name = parts[parts.Length-1];
-            this.Title = Name;
-            FilePath = TempSelectedFilePath;
-            FilePathTextBox.Text = TempSelectedFilePath;
+            if (TempSelectedFilePath != null) // проверка наличия адреса
+            {
+                string[] parts = TempSelectedFilePath.Split("\\");
+                Name = parts[parts.Length - 1];
+                this.Title = Name;
+                FilePath = TempSelectedFilePath;
+                FilePathTextBox.Text = TempSelectedFilePath;
+
+                URLPathTextBox.IsEnabled = true;
+            }
+        }
+
+        private void UrlPathTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ButtonActivator();
+        }
+
+        private void ButtonActivator ()
+        {
+            if (URLPathTextBox.Text.Length > 1)
+            {
+                EnumComboBoxRecordingTools.IsEnabled = true;
+                if (BoolComboBoxRecordingTools)
+                {
+                    StartRecording_Button.IsEnabled = true;
+                }
+
+                UrlTestButton.IsEnabled = true;
+            }
+
+            else
+            {
+                EnumComboBoxRecordingTools.IsEnabled = false;
+                StartRecording_Button.IsEnabled = false;
+                UrlTestButton.IsEnabled = false;
+            }
         }
 
         private void TestURL_Click(object sender, RoutedEventArgs e)
@@ -111,22 +155,52 @@ namespace StreamRecording.RecordingStartWindow
             switch(recordingTools)
             {
                 case RecordingTools.RecordUrlMp3:
-                    record = new RecordUrlMp3(url, FilePath);
+                    //record = new RecordUrlMp3(url, FilePath);
+                    record = new RecordUrlMp3(url, $"{FilePath}.mp3");
                     break;
                 case RecordingTools.RecordUrlWav:
                     record = new RecordUrlWav(url, FilePath);
                     break;
-            }    
+            }
+
+            BoolComboBoxRecordingTools = true;
+            ButtonActivator();
         }
 
         private void ButtonStartRecording_Click(object sender, RoutedEventArgs e)
         {
-            record.StartRecording();
-        }
+            if (BoolStartRecording_Button)
+            {
+                record.StartRecording();
+                BoolStartRecording_Button = false;
+                StartRecording_Button.Content = "Stop";
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            record.StopRecording();
+                // Отключение кнопок
+                FilePathTextBox.IsEnabled = false;
+                FilePathTextButton.IsEnabled = false;
+
+                URLPathTextBox.IsEnabled = false;
+                UrlTestButton.IsEnabled = false;
+
+                EnumComboBoxRecordingTools.IsEnabled = false;
+            }
+
+            else
+            {
+                record.StopRecording();
+                BoolStartRecording_Button = true;
+                StartRecording_Button.Content = "Start";
+
+                // Включение кнопок
+                FilePathTextBox.IsEnabled = true;
+                FilePathTextButton.IsEnabled = true;
+
+                URLPathTextBox.IsEnabled = true;
+                UrlTestButton.IsEnabled = true;
+
+                EnumComboBoxRecordingTools.IsEnabled = true;
+            }
+
         }
     }
 }
