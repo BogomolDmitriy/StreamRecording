@@ -14,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using System.Xml.Linq;
 using Microsoft.Win32;
 using StreamRecording.RecordingStartWindow.Record;
@@ -32,7 +33,7 @@ namespace StreamRecording.RecordingStartWindow
         public string Name;
         private string FilePath;
         //private string UrlAddress;
-        private IRecord record;
+        private RecordURL record;
 
         string TempSelectedFilePath;
 
@@ -40,10 +41,12 @@ namespace StreamRecording.RecordingStartWindow
         bool BoolComboBoxRecordingTools = false; //тригер активации BoxRecording
 
         public ObservableCollection<CaseRecordingStart> ListRecording;
-        public RecordingStart(ObservableCollection<CaseRecordingStart> listRecording)
+        private ApplicationSetup Setup;
+        public RecordingStart(ObservableCollection<CaseRecordingStart> listRecording, ApplicationSetup setup)
         {
             InitializeComponent();
             ListRecording = listRecording;
+            Setup = setup;
             AddList();
             EnumComboBoxRecordingTools.ItemsSource = Enum.GetValues(typeof(RecordingTools));
             //EnumComboBoxRecordingTools.SelectedIndex = 0;
@@ -156,10 +159,10 @@ namespace StreamRecording.RecordingStartWindow
             {
                 case RecordingTools.RecordUrlMp3:
                     //record = new RecordUrlMp3(url, FilePath);
-                    record = new RecordUrlMp3(url, $"{FilePath}.mp3");
+                    record = new RecordUrlMp3(url, FilePath, Setup);
                     break;
                 case RecordingTools.RecordUrlWav:
-                    record = new RecordUrlWav(url, FilePath);
+                    record = new RecordUrlWav(url, FilePath, Setup);
                     break;
             }
 
@@ -187,7 +190,7 @@ namespace StreamRecording.RecordingStartWindow
 
             else
             {
-                record.StopRecording();
+                record.StopRecord();
                 BoolStartRecording_Button = true;
                 StartRecording_Button.Content = "Start";
 
@@ -200,7 +203,13 @@ namespace StreamRecording.RecordingStartWindow
 
                 EnumComboBoxRecordingTools.IsEnabled = true;
             }
+        }
 
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            // Отменить закрытие окна и скрыть его
+            e.Cancel = true;
+            this.Hide();
         }
     }
 }

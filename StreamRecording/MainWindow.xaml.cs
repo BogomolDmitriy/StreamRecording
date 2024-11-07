@@ -72,8 +72,7 @@ namespace StreamRecording
 
         private void AddReccording_Click(object sender, RoutedEventArgs e)
         {
-            new RecordingStart(_CaseRecordingStarts);
-
+            new RecordingStart(_CaseRecordingStarts, windowSetup);
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

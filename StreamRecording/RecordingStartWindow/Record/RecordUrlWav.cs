@@ -9,36 +9,50 @@ using NAudio.Wave;
 
 namespace StreamRecording.RecordingStartWindow.Record
 {
-    public class RecordUrlWav : Record, IRecord
+    public class RecordUrlWav : RecordURL
     {
-        public RecordUrlWav(string urlAddress, string filePath) : base(urlAddress, filePath)
+        public RecordUrlWav(string urlAddress, string filePath, ApplicationSetup setup) : base(urlAddress, filePath, setup)
         {
         }
 
-        public void StopRecording()
-        {
-            RecordProcess = false;
-        }
+        //public void RestartRecording()
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public void StartRecording()
+        //public void StopRecording()
+        //{
+        //    BoolRecordProcess = false;
+        //}
+
+        public override async void StartRecording()
         {
-            throw new NotImplementedException();
+            await Task.Run(() => StreamRecordingURL());
         }
 
         private void StreamRecordingURL()
         {
-            var webRequest = WebRequest.Create(UrlAddress);
-            using (var response = webRequest.GetResponse())
-            using (var stream = response.GetResponseStream())
-            using (var waveOut = new WaveFileWriter(FilePath, new WaveFormat(44100, 16, 2)))
+            BoolRepeatRecordingProcess = true;
+            BoolRecordProcess = true;
+            while (BoolRepeatRecordingProcess) 
             {
-                byte[] buffer = new byte[65536]; // Буфер для чтения аудиопотока
-                int bytesRead;
-
-                while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
+                if (BoolRecordProcess == false)
                 {
-                    waveOut.Write(buffer, 0, bytesRead);
-                    waveOut.Flush();
+                    BoolRecordProcess = true;
+                }
+                var webRequest = WebRequest.Create(UrlAddress);
+                using (var response = webRequest.GetResponse())
+                using (var stream = response.GetResponseStream())
+                using (var waveOut = new WaveFileWriter($"{FilePath}_{DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss")}.wav", new WaveFormat(44100, 16, 2)))
+                {
+                    byte[] buffer = new byte[65536]; // Буфер для чтения аудиопотока
+                    int bytesRead;
+
+                    while (BoolRecordProcess && (bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
+                    {
+                        waveOut.Write(buffer, 0, bytesRead);
+                        waveOut.Flush();
+                    }
                 }
             }
         }
