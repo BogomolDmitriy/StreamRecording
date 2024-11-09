@@ -26,7 +26,7 @@ namespace StreamRecording
             _CaseRecordingStarts = new ObservableCollection<CaseRecordingStart>(); //Список начатых записей
             windowSetup = new ApplicationSetup(5,1,0,1);
             InitializeComponent();
-            //ComboBoxRecordingStreams.ItemsSource = caseRecordingStarts;
+            windowsDataGrid.ItemsSource = _CaseRecordingStarts;
             this.DataContext = this;
         }
 
@@ -72,18 +72,15 @@ namespace StreamRecording
 
         private void AddReccording_Click(object sender, RoutedEventArgs e)
         {
-            new RecordingStart(_CaseRecordingStarts, windowSetup);
+            new RecordingStart(_CaseRecordingStarts, windowSetup).Show();
         }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void WindowsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // Получаем выбранный элемент
-            CaseRecordingStart selectedCase = (CaseRecordingStart)ComboBoxRecordingStreams.SelectedItem;
-            if (selectedCase != null)
+            if (windowsDataGrid.SelectedItem is CaseRecordingStart selectedWindow)
             {
-                // Открываем выбранное окно
-                //Window window = (Window)Activator.CreateInstance(selectedCase._RecordingStart);
-                selectedCase._RecordingStart.Show();
+                selectedWindow._RecordingStart.Show();
+                windowsDataGrid.SelectedItem = null;
             }
         }
     }

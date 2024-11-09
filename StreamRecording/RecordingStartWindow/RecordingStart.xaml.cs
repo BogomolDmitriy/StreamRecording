@@ -40,6 +40,7 @@ namespace StreamRecording.RecordingStartWindow
         bool BoolStartRecording_Button; // Тригер смены функции кнопки StartRecording_Button
         bool BoolComboBoxRecordingTools = false; //тригер активации BoxRecording
 
+        private CaseRecordingStart ThisСase; // Яяейка где находится страница
         public ObservableCollection<CaseRecordingStart> ListRecording;
         private ApplicationSetup Setup;
         public RecordingStart(ObservableCollection<CaseRecordingStart> listRecording, ApplicationSetup setup)
@@ -47,7 +48,7 @@ namespace StreamRecording.RecordingStartWindow
             InitializeComponent();
             ListRecording = listRecording;
             Setup = setup;
-            AddList();
+            //AddList();
             EnumComboBoxRecordingTools.ItemsSource = Enum.GetValues(typeof(RecordingTools));
             //EnumComboBoxRecordingTools.SelectedIndex = 0;
 
@@ -64,7 +65,7 @@ namespace StreamRecording.RecordingStartWindow
 
         public void AddList () //добавляем RecordingStart в лист открития, на главной странице
         {
-            ListRecording.Add(new CaseRecordingStart(this, $"Case {ListRecording.Count}"));
+            ListRecording.Add(new CaseRecordingStart(this, $"{Name}"));
         }
 
         private void AddFilePath_Click(object sender, RoutedEventArgs e)
@@ -186,6 +187,9 @@ namespace StreamRecording.RecordingStartWindow
                 UrlTestButton.IsEnabled = false;
 
                 EnumComboBoxRecordingTools.IsEnabled = false;
+
+                ThisСase = new CaseRecordingStart(this, $"{Name}");
+                ListRecording.Add(ThisСase); // Добавляем страницу в лист
             }
 
             else
@@ -202,6 +206,8 @@ namespace StreamRecording.RecordingStartWindow
                 UrlTestButton.IsEnabled = true;
 
                 EnumComboBoxRecordingTools.IsEnabled = true;
+
+                ListRecording.Remove(ThisСase);
             }
         }
 
