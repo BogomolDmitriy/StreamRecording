@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:StreamRecording"
         xmlns:wpf="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="Settings" Height="300" Width="250">
+        Title="Settings" Height="300" Width="250"
+        ResizeMode="NoResize">
     <Grid>
         <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation ="Vertical">
             <GroupBox Header="Recording timer" Margin="5">

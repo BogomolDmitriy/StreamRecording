@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StreamRecording.RecordingStartWindow.ErrorMessage"
         mc:Ignorable="d"
-        Title="WindowErrorMessage" Height="150" Width="260">
+        Title="WindowErrorMessage" Height="150" Width="260"
+        ResizeMode="NoResize">
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation ="Vertical" Margin="10">
             <TextBlock HorizontalAlignment="Center" 

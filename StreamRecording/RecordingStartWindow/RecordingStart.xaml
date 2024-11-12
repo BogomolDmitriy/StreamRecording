@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StreamRecording.RecordingStartWindow"
         mc:Ignorable="d"
-        Title="RecordingStart" Height="380" Width="411">
+        Title="RecordingStart" Height="380" Width="411"
+        ResizeMode="NoResize">
     <Grid>
         <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation ="Vertical" Margin="20">
             <Label x:Name="LabelStatusStrim" Content="Status"/>
@@ -21,10 +22,10 @@
             <Label Content="Selecting a recording method"/>
             <ComboBox x:Name="EnumComboBoxRecordingTools" SelectionChanged ="EnumComboBoxRecordingTools_SelectedIndexChanged"  Width="250" Height="30" HorizontalAlignment="Left"/>
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation ="Horizontal">
-                <ComboBox Width="250" Height="30" HorizontalAlignment="Left" Margin="0,5,5,5"/>
-                <Button Content="Add path" Width="95" Height="30"/>
+                <ComboBox IsEnabled="False" Width="250" Height="30" HorizontalAlignment="Left" Margin="0,5,5,5"/>
+                <Button IsEnabled="False" Content="Add path" Width="95" Height="30"/>
             </StackPanel>
-            <TextBox Width="350" Height="30" Margin="0,5,5,5" HorizontalAlignment="Left"/>
+            <TextBox IsEnabled="False" Width="350" Height="30" Margin="0,5,5,5" HorizontalAlignment="Left"/>
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation ="Horizontal">
                 <Button x:Name="SaveRecording_Button" Content="Save" Width="100" Height="30" Margin="0,20,25,5"/>
                 <Button x:Name="StartRecording_Button" Click="ButtonStartRecording_Click" Content="Start" Width="100" Height="30" Margin="0,20,25,5"/>

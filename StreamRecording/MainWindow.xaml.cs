@@ -1,15 +1,8 @@
 ﻿using Microsoft.Win32;
 using StreamRecording.RecordingStartWindow;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 using System.Collections.ObjectModel;
 
 namespace StreamRecording
@@ -28,6 +21,7 @@ namespace StreamRecording
             InitializeComponent();
             windowsDataGrid.ItemsSource = _CaseRecordingStarts;
             this.DataContext = this;
+            NewStorage_Field.IsEnabled = false;
         }
 
         string selectedFilePath;
@@ -67,7 +61,7 @@ namespace StreamRecording
 
         private void About_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("About clicked");
+            MessageBox.Show("Application version (Alpha 0.1)");
         }
 
         private void AddReccording_Click(object sender, RoutedEventArgs e)
@@ -82,6 +76,19 @@ namespace StreamRecording
                 selectedWindow._RecordingStart.Show();
                 windowsDataGrid.SelectedItem = null;
             }
+        }
+
+        private void StopAll_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (var item in _CaseRecordingStarts)
+            {
+                item._RecordingStart.Stop();
+            }
+        }
+
+        private void SaveAll_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

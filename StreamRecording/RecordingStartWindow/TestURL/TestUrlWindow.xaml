@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StreamRecording.RecordingStartWindow.TestURL"
         mc:Ignorable="d"
-        Title="TestUrlWindow" Height="400" Width="310">
+        Title="TestUrlWindow" Height="400" Width="310"
+        ResizeMode="NoResize">
     <Grid>
         <StackPanel  HorizontalAlignment="Center" VerticalAlignment="Center" Orientation ="Vertical">
             <DataGrid x:Name="TestURLDataGrid" AutoGenerateColumns="True" Width="280" Height="300" />

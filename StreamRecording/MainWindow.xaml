@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StreamRecording"
         mc:Ignorable="d"
-        Title="StreamRecording" Height="450" Width="350" Closing="Window_Closing">
+        Title="StreamRecording" Height="350" Width="350" Closing="Window_Closing"
+        ResizeMode="NoResize">
     <Grid>
         <Menu VerticalAlignment="Top">
             <MenuItem Header="File">
-                <MenuItem Header="New Storage" Click="New_Storage"/>
+                <MenuItem x:Name="NewStorage_Field"  Header="New Storage" Click="New_Storage"/>
                 <Separator/>
                 <MenuItem Header="Exit" Click="Exit_Click"/>
             </MenuItem>
@@ -21,7 +22,7 @@
             </MenuItem>
         </Menu>
 
-        
+
 
         <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation ="Vertical">
 
@@ -33,11 +34,12 @@
             </DataGrid>
 
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation ="Horizontal">
-                <Button x:Name ="buttonAdd"  Content="Add" Width="100" Height="25" Click="AddReccording_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,10,10,10"/>
+                <Button IsEnabled="False" x:Name ="buttonSaveAll"  Content="Save All" Width="95" Height="25" Click="SaveAll_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,10,9,10"/>
+                <Button x:Name ="buttonStopAll"  Content="Stop All" Width="95" Height="25" Click="StopAll_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,10,10,10"/>
+                <Button x:Name ="buttonAdd"  Content="Add" Width="95" Height="25" Click="AddReccording_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,10,9,10"/>
             </StackPanel>
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation ="Horizontal">
             </StackPanel>
         </StackPanel>
-
     </Grid>
 </Window>
