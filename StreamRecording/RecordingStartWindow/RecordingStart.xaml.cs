@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Xml.Linq;
 using Microsoft.Win32;
+using StreamRecording.RecordingStartWindow.ErrorMessage;
 using StreamRecording.RecordingStartWindow.Record;
 using StreamRecording.RecordingStartWindow.TestURL;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -33,7 +34,7 @@ namespace StreamRecording.RecordingStartWindow
         public string Name;
         private string FilePath;
         //private string UrlAddress;
-        private RecordURL record;
+        public RecordURL record;
 
         string TempSelectedFilePath;
 
@@ -147,8 +148,8 @@ namespace StreamRecording.RecordingStartWindow
             }
             catch (Exception)
             {
-
-                MessageBox.Show("Source not found", "Error");
+                new WindowErrorMessage(Setup, this).Show();
+                //MessageBox.Show("Source not found", "Error");
             }
         }
 
@@ -175,40 +176,50 @@ namespace StreamRecording.RecordingStartWindow
         {
             if (BoolStartRecording_Button)
             {
-                record.StartRecording();
-                BoolStartRecording_Button = false;
-                StartRecording_Button.Content = "Stop";
-
-                // Отключение кнопок
-                FilePathTextBox.IsEnabled = false;
-                FilePathTextButton.IsEnabled = false;
-
-                URLPathTextBox.IsEnabled = false;
-                UrlTestButton.IsEnabled = false;
-
-                EnumComboBoxRecordingTools.IsEnabled = false;
-
-                ThisСase = new CaseRecordingStart(this, $"{Name}");
-                ListRecording.Add(ThisСase); // Добавляем страницу в лист
+                Start();
             }
 
             else
             {
-                record.StopRecord();
-                BoolStartRecording_Button = true;
-                StartRecording_Button.Content = "Start";
-
-                // Включение кнопок
-                FilePathTextBox.IsEnabled = true;
-                FilePathTextButton.IsEnabled = true;
-
-                URLPathTextBox.IsEnabled = true;
-                UrlTestButton.IsEnabled = true;
-
-                EnumComboBoxRecordingTools.IsEnabled = true;
-
-                ListRecording.Remove(ThisСase);
+                Stop();
             }
+        }
+
+        public void Start ()
+        {
+            record.StartRecording();
+            BoolStartRecording_Button = false;
+            StartRecording_Button.Content = "Stop";
+
+            // Отключение кнопок
+            FilePathTextBox.IsEnabled = false;
+            FilePathTextButton.IsEnabled = false;
+
+            URLPathTextBox.IsEnabled = false;
+            UrlTestButton.IsEnabled = false;
+
+            EnumComboBoxRecordingTools.IsEnabled = false;
+
+            ThisСase = new CaseRecordingStart(this, $"{Name}");
+            ListRecording.Add(ThisСase); // Добавляем страницу в лист
+        }
+
+        public void Stop()
+        {
+            record.StopRecord();
+            BoolStartRecording_Button = true;
+            StartRecording_Button.Content = "Start";
+
+            // Включение кнопок
+            FilePathTextBox.IsEnabled = true;
+            FilePathTextButton.IsEnabled = true;
+
+            URLPathTextBox.IsEnabled = true;
+            UrlTestButton.IsEnabled = true;
+
+            EnumComboBoxRecordingTools.IsEnabled = true;
+
+            ListRecording.Remove(ThisСase);
         }
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)

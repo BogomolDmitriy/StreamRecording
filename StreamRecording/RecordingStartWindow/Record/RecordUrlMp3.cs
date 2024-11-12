@@ -56,7 +56,7 @@ namespace StreamRecording.RecordingStartWindow.Record
             catch (Exception ex)
             {
                 MessageBox.Show($"Ошибка при записи {ex.Message}");
-                Task.Delay(1000);// Зажержка
+                Task.Delay(1000);// Задержка
                 StartRecording();
             }
         }

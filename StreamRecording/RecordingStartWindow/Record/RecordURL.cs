@@ -39,6 +39,11 @@ namespace StreamRecording.RecordingStartWindow.Record
             Timer.Stop();
         }
 
+        public void PauseRecord()
+        {
+
+        }
+
         public void RestartRecord()
         {
             BoolRecordProcess = false;
